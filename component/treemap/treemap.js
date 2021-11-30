@@ -1,5 +1,4 @@
 import React from "react"
-import { Segment } from "semantic-ui-react"
 import ReactEcharts from "echarts-for-react"
 import * as d3 from 'd3'
 
@@ -257,12 +256,12 @@ const TreeMap = ({data}) => {
       }
     
     return(
-        <Segment>
+        
             <ReactEcharts
             option={option}
-            style={{ height: '700px' }}
+            style={{ height: '900px' }}
         />
-        </Segment>
+        
     )
     }
 export default TreeMap
