@@ -37,43 +37,47 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
     const AcctSpecificCalculations = (calcType,data) =>{
         if(calcType === 'HighestDepositAcct'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'C')
+            const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             
             return [
                 {name:'Account('+tmpHighest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
                 {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage'}
+                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
             
             ]
         }else if(calcType === 'LowestDepositAcct'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'C')
+            const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
                 {name:'Account('+tmpLowest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
                 {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage'}
+                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
             
             ]
         }else if(calcType === 'HighestWtdAcct'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'D')
+            const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             return [
                 {name:'Account('+tmpHighest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
                 {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage'}
+                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
             
             ]
         }else if(calcType === 'LowestWtdAcct'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'D')
+            const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
                 {name:'Account('+tmpLowest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
                 {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage'}
+                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
             
             ]
         }
