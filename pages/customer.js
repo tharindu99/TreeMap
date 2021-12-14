@@ -8,7 +8,7 @@ import TreeMap from '../component/treemap/treemap'
 import data_cusotmer from '../data/cusotmer/IC4PRO_CUSTOMER.json'
 import data_exceptions  from '../data/cusotmer/IC4PRO_EXCEPTIONS.json'
 import data_journal  from '../data/cusotmer/IC4PRO_JOURNAL.json'
-import data_srt  from '../data/cusotmer/IC4PRO_STR.json'
+import data_str  from '../data/cusotmer/IC4PRO_STR.json'
 
 
 import CustomerData from '../component/customer/customerData'
@@ -39,7 +39,7 @@ export default function Customer() {
       </Head>
 
       <Heading>Customer Account Analysis</Heading>
-      <CustomerData cusotmer={data_cusotmer} exception={data_exceptions} journal={data_journal} srt={data_srt}/>
+      <CustomerData cusotmer={data_cusotmer} exception={data_exceptions} journal={data_journal} str={data_str}/>
         
      
 
