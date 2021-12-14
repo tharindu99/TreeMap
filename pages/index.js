@@ -6,6 +6,7 @@ import { Grid, GridItem, Box } from '@chakra-ui/react'
 import TreeMap from '../component/treemap/treemap'
 
 import Readdata from '../data/d3-data.json'
+import TreeDataManipulator from '../component/treemap/treeDataManipulator'
 
 const style = {
   h1: {
@@ -33,7 +34,7 @@ export default function Home() {
       </Head>
 
       
-        <TreeMap data={Readdata.callover}></TreeMap>
+        <TreeDataManipulator data={Readdata.callover} />
         
      
 
