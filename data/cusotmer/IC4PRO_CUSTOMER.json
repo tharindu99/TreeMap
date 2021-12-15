@@ -1,0 +1,47 @@
+[
+  {
+    "IC4PROCUSTOMERID": "A11000",
+    "IC4PROCUSTOMERNAME": "Oseni Titiloye",
+    "IC4PROADDRESS": "First Street, UK",
+    "IC4PROBRANCHCODE": "AXXX",
+    "IC4PROTELEPHONE": 204674443,
+    "IC4PROSTATUS": "Active",
+    "IC4PROINPUTTER": "Teller-1"
+  },
+  {
+    "IC4PROCUSTOMERID": "B30000",
+    "IC4PROCUSTOMERNAME": "John Bell Hays",
+    "IC4PROADDRESS": "2 London Road",
+    "IC4PROBRANCHCODE": "AXXX",
+    "IC4PROTELEPHONE": 136528998,
+    "IC4PROSTATUS": "Active",
+    "IC4PROINPUTTER": "Teller-2"
+  },
+  {
+    "IC4PROCUSTOMERID": "K88888",
+    "IC4PROCUSTOMERNAME": "Kay Paul",
+    "IC4PROADDRESS": "3 Next Road, UK",
+    "IC4PROBRANCHCODE": "A123",
+    "IC4PROTELEPHONE": "",
+    "IC4PROSTATUS": "Active",
+    "IC4PROINPUTTER": "Teller-1"
+  },
+  {
+    "IC4PROCUSTOMERID": "T23890",
+    "IC4PROCUSTOMERNAME": "JK Lord",
+    "IC4PROADDRESS": "100 Tyson Avenue",
+    "IC4PROBRANCHCODE": "AXXX",
+    "IC4PROTELEPHONE": 578300281,
+    "IC4PROSTATUS": "Active",
+    "IC4PROINPUTTER": "Teller-1"
+  },
+  {
+    "IC4PROCUSTOMERID": "X99999",
+    "IC4PROCUSTOMERNAME": "Automate Left",
+    "IC4PROADDRESS": "12 Boring Street, UK",
+    "IC4PROBRANCHCODE": "AB12",
+    "IC4PROTELEPHONE": 365378999,
+    "IC4PROSTATUS": "Active",
+    "IC4PROINPUTTER": "Teller-2"
+  }
+]
