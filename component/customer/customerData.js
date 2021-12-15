@@ -42,15 +42,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             
             return [
-<<<<<<< HEAD
                 {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
-=======
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
->>>>>>> f178abf53e3cd48bf7feee4243b6bab7165f8acb
             
             ]
         }else if(calcType === 'LowestDepositAcct'){
@@ -59,15 +53,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-<<<<<<< HEAD
                 {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
-=======
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
->>>>>>> f178abf53e3cd48bf7feee4243b6bab7165f8acb
             
             ]
         }else if(calcType === 'HighestWtdAcct'){
@@ -76,15 +64,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             return [
-<<<<<<< HEAD
                 {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
-=======
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
->>>>>>> f178abf53e3cd48bf7feee4243b6bab7165f8acb
             
             ]
         }else if(calcType === 'LowestWtdAcct'){
@@ -93,15 +75,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-<<<<<<< HEAD
                 {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
                 {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
-=======
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 14,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 14,fontWeight: 'bold' }}
->>>>>>> f178abf53e3cd48bf7feee4243b6bab7165f8acb
             
             ]
         }

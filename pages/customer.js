@@ -14,12 +14,9 @@ import data_str  from '../data/cusotmer/IC4PRO_STR.json'
 import CustomerData from '../component/customer/customerData'
 
 const style = {
-<<<<<<< HEAD
   div:{
     
   },
-=======
->>>>>>> f178abf53e3cd48bf7feee4243b6bab7165f8acb
   h1: {
     marginTop: '3em',
   },
