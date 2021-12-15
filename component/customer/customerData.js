@@ -42,9 +42,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             
             return [
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
+                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
         }else if(calcType === 'LowestDepositAcct'){
@@ -53,9 +53,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
+                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
         }else if(calcType === 'HighestWtdAcct'){
@@ -64,9 +64,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             return [
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
+                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
         }else if(calcType === 'LowestWtdAcct'){
@@ -75,9 +75,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }}
+                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
         }
@@ -95,10 +95,10 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
         const tmpLowDR = d3.least(tmpDrRollUp,([,sum])=> -sum)
         
         return [
-            {name: 'HighestCrType('+tmpHighCR[0]+','+NumberPattern(tmpHighCR[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-            {name: 'LowestCrType('+tmpLowCR[0]+','+NumberPattern(tmpLowCR[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-            {name: 'HighestDrType('+tmpHighDR[0]+','+NumberPattern(tmpHighDR[1])+')',label:{fontSize: 12,fontWeight: 'bold' }},
-            {name: 'LowestDrType('+tmpLowDR[0]+','+NumberPattern(tmpLowDR[1].toFixed(2))+')',label:{fontSize: 12,fontWeight: 'bold' }},
+            {name: 'HighestCrType('+tmpHighCR[0]+','+NumberPattern(tmpHighCR[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+            {name: 'LowestCrType('+tmpLowCR[0]+','+NumberPattern(tmpLowCR[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+            {name: 'HighestDrType('+tmpHighDR[0]+','+NumberPattern(tmpHighDR[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+            {name: 'LowestDrType('+tmpLowDR[0]+','+NumberPattern(tmpLowDR[1].toFixed(2))+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
             {name: 'Findings',label:{fontSize: 12,fontWeight: 'bold' }}
         ]
     }
@@ -116,16 +116,16 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
         return hourlyGrouped.map(d => {
             return {
                 name:'BtwHourOf('+d+')',
-                label:{fontSize: 12,fontWeight: 'bold' },
+                label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                 children:[{
                     name:'('+NumberPattern(RollUpSum.get(d))+','+RollUpCount.get(d)+')',
-                    label:{fontSize: 12,fontWeight: 'bold' }
+                    label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                 }]
             }
         })
     }
 
-    const AmPmAnalysis = (data,AMPM,CRDR,MainTotal) => {
+    const AmPmAnalysis = (data,AMPM,CRDR,MainTotal,accountID,year) => {
 
         let dataM,total,count,highest,lowest,special_word
 
@@ -133,6 +133,12 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
         if(AMPM === 'Pm')dataM = data.filter(d=> d['IC4PROTRANSTIME'] >= 1200 && d['IC4PROTRANSTIME'] <= 2359)
         if(CRDR === 'Credit'){ dataM = dataM.filter(d => d.IC4PRODRCRIND === 'C'); special_word = 'Deposit'} 
         if(CRDR === 'Debit'){dataM = dataM.filter(d => d.IC4PRODRCRIND === 'D'); special_word = 'Wtd'}
+
+        console.log(accountID,year,dataM,dataM.filter(d => d.IC4PROACCOUNTID === accountID))
+        
+        if(accountID != 'ALL')dataM = dataM.filter(d => d.IC4PROACCOUNTID === accountID)
+        if(year != 'ALL')dataM = dataM.filter(d => d.IC4PROTRANSDATE.toString().substring(0,4) === year)
+            
 
         total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
         count = dataM.length
@@ -148,37 +154,37 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
             const TransTypeLow = d3.min(CrRollUp)
 
             return [
-                {name:AMPM+CRDR+'('+NumberPattern(total)+','+count+')', label:{fontSize: 12,fontWeight: 'bold' },
+                {name:AMPM+CRDR+'('+NumberPattern(total)+','+count+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                 children:calcBtwHourOf(dataM)
                 },
-                {name:AMPM+'Average('+NumberPattern((total/count).toFixed(2))+')', label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'Percentage('+((total*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }},
-                {name:'AcctWithHighest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },
+                {name:AMPM+'Average('+NumberPattern((total/count).toFixed(2))+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Percentage('+((total*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'AcctWithHighest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     children:[
-                        {name: 'Account('+highest[0]+')', label:{fontSize: 12,fontWeight: 'bold' }},
-                        {name: 'AcctTot'+CRDR+'('+NumberPattern(highest[1])+','+HighestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' }},
-                        {name:'Percentage('+((highest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }},
+                        {name: 'Account('+highest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'AcctTot'+CRDR+'('+NumberPattern(highest[1])+','+HighestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name:'Percentage('+((highest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                     ]
                 },
-                {name:'AcctWithLowest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },
+                {name:'AcctWithLowest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     children:[
-                        {name: 'Account('+lowest[0]+')', label:{fontSize: 12,fontWeight: 'bold' }},
-                        {name: 'AcctTot'+CRDR+'('+NumberPattern(lowest[1])+','+LowestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' }},
-                        {name:'Percentage('+((lowest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' }},
+                        {name: 'Account('+lowest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'AcctTot'+CRDR+'('+NumberPattern(lowest[1])+','+LowestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name:'Percentage('+((lowest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                     ]
                 },
                 {name:AMPM+'TransType', label:{fontSize: 12,fontWeight: 'bold' },
                     children:[
                         {name:'Highest'+CRDR+'Type('+TransTypeHigh[0]+','+NumberPattern(TransTypeHigh[1])+')',
-                        label:{fontSize: 12,fontWeight: 'bold' }
+                        label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                         },
                         {name:'Lowest'+CRDR+'Type('+TransTypeLow[0]+','+NumberPattern(TransTypeLow[1])+')',
-                        label:{fontSize: 12,fontWeight: 'bold' }
+                        label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                         },
-                        {name:'Findings'},
+                        {name:'Findings',lineStyle:{color:'#DC143C'}}
                     ]
                 },
-                {name:'Findings'},
+                {name:'Findings',lineStyle:{color:'#DC143C'},},
             ]
         }else{
             return []
@@ -269,12 +275,13 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
         const StrForCutomer = strM.filter(d => d.IC4PROCUSTOMERID === cusotmerID)
         const STRriskGroupBy = Array.from(d3.group(StrForCutomer, d => d.IC4PRORATING), ([name,children]) => ({name,children}))
         
-        const RiskStatus =(data) => {
+        const RiskStatus =(data,flag) => {
             const tmp = Array.from(d3.group(data, d => d.IC4PROSTATUS), ([name,children]) => ({name,children}))
             return tmp.map(d =>{
                 return {
                     name:'status : '+d.name+'('+d.children.length+')',
-                    label:{fontSize: 12,fontWeight: 'bold' }
+                    label:{fontSize: 12,fontWeight: 'bold' },
+                    lineStyle: (flag === 'excep')? {color:'#32CD32'}:{color:'#FFE933'},
                 }
             })
         }
@@ -286,11 +293,11 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                  label:{fontSize: 12,fontWeight: 'bold'},
                  lineStyle:{color:'#DC143C'},
                 children: [
-                    {name:'AM('+NumberPattern(AMcredit)+','+amCreditVoucher+')', label:{fontSize: 12,fontWeight: 'bold' },
-                    children: AmPmAnalysis(array,'Am','Credit',(AMcredit+PMcredit)), label:{fontSize: 12,fontWeight: 'bold' }
+                    {name:'AM('+NumberPattern(AMcredit)+','+amCreditVoucher+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                    children: AmPmAnalysis(array,'Am','Credit',(AMcredit+PMcredit),accountID,year), label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
-                    {name:'PM('+NumberPattern(PMcredit)+','+pmCreditVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },
-                    children: AmPmAnalysis(array,'Pm','Credit',(AMcredit+PMcredit)), label:{fontSize: 12,fontWeight: 'bold' }
+                    {name:'PM('+NumberPattern(PMcredit)+','+pmCreditVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                    children: AmPmAnalysis(array,'Pm','Credit',(AMcredit+PMcredit),accountID,year), label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
                     {name:'Remark('+RemarkGenerator(AMcredit,PMcredit,'Credit')+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
                 ]
@@ -299,50 +306,50 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                  label:{fontSize: 12,fontWeight: 'bold' },
                  lineStyle:{color:'#DC143C'},
                 children: [
-                    {name:'AM('+NumberPattern(AMdebit)+','+amDebitVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },
-                    children: AmPmAnalysis(array,'Am','Debit',(AMdebit+PMdebit)), label:{fontSize: 12,fontWeight: 'bold' }
+                    {name:'AM('+NumberPattern(AMdebit)+','+amDebitVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                    children: AmPmAnalysis(array,'Am','Debit',(AMdebit+PMdebit),accountID,year), label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
-                    {name:'PM('+NumberPattern(PMdebit)+','+pmDebitVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },
-                    children: AmPmAnalysis(array,'Pm','Debit',(AMdebit+PMdebit)), label:{fontSize: 12,fontWeight: 'bold' }
+                    {name:'PM('+NumberPattern(PMdebit)+','+pmDebitVoucher+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                    children: AmPmAnalysis(array,'Pm','Debit',(AMdebit+PMdebit),accountID,year), label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
-                    {name:'Remark('+RemarkGenerator(AMdebit,PMdebit,'Debit')+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'}}
+                    {name:'Remark('+RemarkGenerator(AMdebit,PMdebit,'Debit')+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},lineStyle:{color:'#DC143C'},}
                 ]
                 },
                 {name:'Statistics',
                  label:{fontSize: 12,fontWeight: 'bold' },
                  lineStyle:{color:'#DC143C'},
                  children:[
-                    {name:'Difference('+NumberPattern((AMcredit+PMcredit-AMdebit-PMdebit).toFixed(2))+' , '+Math.abs((amCreditVoucher+pmCreditVoucher)-(amDebitVoucher+pmDebitVoucher))+')',
-                     label:{fontSize: 14},
+                    {name:'Difference('+NumberPattern(Math.abs(AMcredit+PMcredit-AMdebit-PMdebit).toFixed(2))+' , '+Math.abs((amCreditVoucher+pmCreditVoucher)-(amDebitVoucher+pmDebitVoucher))+')',
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                     },
                     {name:'CrAverage('+NumberPattern(((AMcredit+PMcredit)/(amCreditVoucher+pmCreditVoucher)).toFixed(2))+')',
-                    label:{fontSize: 12,fontWeight: 'bold' },
+                    label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
                     {name:'DrAverage('+NumberPattern(((AMdebit+PMdebit)/(amDebitVoucher+pmDebitVoucher)).toFixed(2))+')',
-                    label:{fontSize: 12,fontWeight: 'bold' },
+                    label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     },
                     {name:'HighestDepositAcct',
-                     label:{fontSize: 14},
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                     // lineStyle:{color:'#DC143C'},
                      children: AcctSpecificCalculations('HighestDepositAcct',array)
                     },
                     {name:'LowestDepositAcct',
-                     label:{fontSize: 14},
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                      children: AcctSpecificCalculations('LowestDepositAcct',array)
                     // lineStyle:{color:'#DC143C'},
                     },
                     {name:'HighestWtdAcct',
-                     label:{fontSize: 14},
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                      children: AcctSpecificCalculations('HighestWtdAcct',array)
                     // lineStyle:{color:'#DC143C'},
                     },
                     {name:'LowestWtdAcct',
-                     label:{fontSize: 14},
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                      children: AcctSpecificCalculations('LowestWtdAcct',array)
                     // lineStyle:{color:'#DC143C'},
                     },
                     {name:'TransType',
-                     label:{fontSize: 14},
+                     label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                      children: TotalTransType(array)
                     // lineStyle:{color:'#DC143C'},
                     },
@@ -355,7 +362,8 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                     return{
                         name: 'Risk-'+d1.name+'('+d1.children.length+')',
                         label:{fontSize: 12,fontWeight: 'bold' },
-                        children: RiskStatus(d1.children)
+                        lineStyle:{color:'#32CD32'},
+                        children: RiskStatus(d1.children,'excep')
                     }
                 })
                 
@@ -367,7 +375,8 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                     return{
                         name: 'Risk-'+d2.name+'('+d2.children.length+')',
                         label:{fontSize: 12,fontWeight: 'bold' },
-                        children: RiskStatus(d2.children)
+                        lineStyle:{color:'#FFE933'},
+                        children: RiskStatus(d2.children,'str')
                     }
                 })
                 },
