@@ -2,6 +2,7 @@ import TreeMap from "../treemap/treemap"
 import { Spinner, Select } from '@chakra-ui/react'
 import * as d3 from 'd3'
 import { useState } from "react"
+import PerAccountAnalytics from "./perAccountAnalytics"
 
 
 const CustomerData = ({cusotmer,exception,journal,str}) => {
@@ -133,8 +134,6 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
         if(AMPM === 'Pm')dataM = data.filter(d=> d['IC4PROTRANSTIME'] >= 1200 && d['IC4PROTRANSTIME'] <= 2359)
         if(CRDR === 'Credit'){ dataM = dataM.filter(d => d.IC4PRODRCRIND === 'C'); special_word = 'Deposit'} 
         if(CRDR === 'Debit'){dataM = dataM.filter(d => d.IC4PRODRCRIND === 'D'); special_word = 'Wtd'}
-
-        console.log(accountID,year,dataM,dataM.filter(d => d.IC4PROACCOUNTID === accountID))
         
         if(accountID != 'ALL')dataM = dataM.filter(d => d.IC4PROACCOUNTID === accountID)
         if(year != 'ALL')dataM = dataM.filter(d => d.IC4PROTRANSDATE.toString().substring(0,4) === year)
@@ -198,9 +197,7 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
     const TreeGenerator = (array,parameter) => {
         const child_arr =  Array.from(d3.group(array, d => d[parameter]), ([name,children]) => ({name,children}))
         return child_arr
-    }
-
-    
+    }  
 
     const cutomerToAccount = (cusotmerId) => {
         const transactions = journalGroupByCustomer.get(cusotmerId)
@@ -254,7 +251,7 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                 
             }
             if(IC4PROTRANSTIME >= 1200 && IC4PROTRANSTIME <= 2359){
-                if(transType === 'D'){
+                if(transType === 'C'){
                     PMcredit += amt
                     pmCreditVoucher += 1
                 }else{
@@ -419,9 +416,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                             {name:'Monthly'},
                             {name:'Quartelly'},
                         
-                        ] //.concat(TotalAnalyticsGenerator(DataFilter(d1.name,'IC4PROACCOUNTID'),d1.name,'ALL'))
+                        ]
                     }
-                }).concat(TotalAnalyticsGenerator(DataFilter(d1.name,'IC4PROACCOUNTID'),d1.name,'ALL'))
+                }).concat(PerAccountAnalytics([d1.name,d1.data,str,exception,cusotmerID]))
             }
         }).concat(TotalAnalyticsGenerator(journalGroupByCustomer.get(cusotmerID),'ALL','ALL'))
 
