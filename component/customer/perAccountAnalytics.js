@@ -84,48 +84,49 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
     }
 
     const AcctSpecificCalculations = (calcType,data) =>{
-        if(calcType === 'HighestDepositAcct'){
+        
+        if(calcType === 'HighestDepositYear'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'C')
             const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
-            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
+            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['year'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
-            
+
             return [
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                {name:'AcctTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Year('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'YearTotCr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                 {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
-        }else if(calcType === 'LowestDepositAcct'){
+        }else if(calcType === 'LowestDepositYear'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'C')
             const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
-            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
+            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['year'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                {name:'AcctTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Year('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'YearTotCr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                 {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
-        }else if(calcType === 'HighestWtdAcct'){
+        }else if(calcType === 'HighestWtdYear'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'D')
             const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
-            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
+            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['year'])
             const tmpHighest= d3.least(tmpRollUp,([,sum])=> -sum)
             return [
-                {name:'Account('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                {name:'AcctTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Year('+tmpHighest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'YearTotDr('+NumberPattern(tmpHighest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                 {name:'Percentage('+((tmpHighest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
-        }else if(calcType === 'LowestWtdAcct'){
+        }else if(calcType === 'LowestWtdYear'){
             const dataM = data.filter(d => d['IC4PRODRCRIND'] ===  'D')
             const Total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
-            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
+            const tmpRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['year'])
             const tmpLowest = d3.least(tmpRollUp,([,sum])=> sum)
             return [
-                {name:'Account('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                {name:'AcctTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'Year('+tmpLowest[0]+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                {name:'YearTotDr('+NumberPattern(tmpLowest[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                 {name:'Percentage('+((tmpLowest[1]*100)/Total).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},}
             
             ]
@@ -147,14 +148,15 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
         
         total = d3.sum(dataM, d => d.IC4PROTRANSAMOUNT)
         count = dataM.length
-        //console.log(total,AMPM,CRDR,dataM)
+        //console.log(dataM)
 
         if(dataM.length>0){
-            const groupByAcc= d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROACCOUNTID'])
-              highest = d3.least(groupByAcc,([,sum])=> -sum)
-            const HighestNumberOfTransc = d3.group(dataM, d=> d.IC4PROACCOUNTID).get(highest[0]).length
-            lowest = d3.least(groupByAcc,([,sum])=> sum)
-            const LowestNumberOfTransc = d3.group(dataM, d=> d.IC4PROACCOUNTID).get(lowest[0]).length
+
+            const groupByYear= d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['year'])
+            highest = d3.least(groupByYear,([,sum])=> -sum)
+            const HighestNumberOfTransc = d3.group(dataM, d=> d.year).get(highest[0]).length
+            lowest = d3.least(groupByYear,([,sum])=> sum)
+            const LowestNumberOfTransc = d3.group(dataM, d=> d.year).get(lowest[0]).length
             const CrRollUp = d3.rollup(dataM, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROTRANSTYPE'])
             const TransTypeHigh = d3.max(CrRollUp)
             const TransTypeLow = d3.min(CrRollUp)
@@ -165,17 +167,17 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                 },
                 {name:AMPM+'Average('+NumberPattern((total/count).toFixed(2))+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                 {name:'Percentage('+((total*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                {name:'AcctWithHighest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                {name:'YearWithHighest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     children:[
-                        {name: 'Account('+highest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                        {name: 'AcctTot'+CRDR+'('+NumberPattern(highest[1])+','+HighestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'Year('+highest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'YearTot'+CRDR+'('+NumberPattern(highest[1])+','+HighestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                         {name:'Percentage('+((highest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                     ]
                 },
-                {name:'AcctWithLowest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                {name:'YearWithLowest'+AMPM+special_word, label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                     children:[
-                        {name: 'Account('+lowest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
-                        {name: 'AcctTot'+CRDR+'('+NumberPattern(lowest[1])+','+LowestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'Year('+lowest[0]+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
+                        {name: 'YearTot'+CRDR+'('+NumberPattern(lowest[1])+','+LowestNumberOfTransc+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                         {name:'Percentage('+((lowest[1]*100)/MainTotal).toFixed(2)+'%)',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
                     ]
                 },
@@ -245,7 +247,7 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                 {name:'Remark('+RemarkGenerator(AMdebit,PMdebit,'Debit')+')', label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},lineStyle:{color:'#DC143C'},}
             ]
             },
-            {name:'Statistics',
+            {name:'Descriptive',
              label:{fontSize: 12,fontWeight: 'bold' },
              lineStyle:{color:'#DC143C'},
              children:[
@@ -258,24 +260,24 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                 {name:'DrAverage('+NumberPattern(((AMdebit+PMdebit)/(amDebitVoucher+pmDebitVoucher)).toFixed(2))+')',
                 label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
                 },
-                {name:'HighestDepositAcct',
+                {name:'HighestDepositYear',
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                 // lineStyle:{color:'#DC143C'},
-                 children: AcctSpecificCalculations('HighestDepositAcct',array)
+                 children: AcctSpecificCalculations('HighestDepositYear',array)
                 },
-                {name:'LowestDepositAcct',
+                {name:'LowestDepositYear',
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
-                 children: AcctSpecificCalculations('LowestDepositAcct',array)
+                 children: AcctSpecificCalculations('LowestDepositYear',array)
                 // lineStyle:{color:'#DC143C'},
                 },
-                {name:'HighestWtdAcct',
+                {name:'HighestWtdYear',
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
-                 children: AcctSpecificCalculations('HighestWtdAcct',array)
+                 children: AcctSpecificCalculations('HighestWtdYear',array)
                 // lineStyle:{color:'#DC143C'},
                 },
-                {name:'LowestWtdAcct',
+                {name:'LowestWtdYear',
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
-                 children: AcctSpecificCalculations('LowestWtdAcct',array)
+                 children: AcctSpecificCalculations('LowestWtdYear',array)
                 // lineStyle:{color:'#DC143C'},
                 },
                 {name:'TransType',
