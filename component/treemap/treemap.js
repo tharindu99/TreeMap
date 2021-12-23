@@ -4,6 +4,9 @@ import * as d3 from 'd3'
 
 const TreeMap = ({data}) => {
 
+  const formatTime = d3.timeFormat("%Y%d%m-%H%M%S");
+  const timeStamp = formatTime(Date.now())
+
     const option = {
         tooltip: {
           trigger: 'item',
@@ -12,7 +15,10 @@ const TreeMap = ({data}) => {
         toolbox: {
           show: true,
           feature: {
-            saveAsImage: { show: true }
+            saveAsImage: { 
+              show: true,
+              name:'ic4proDecisonTree-'+timeStamp
+            }
           }
         },
         
