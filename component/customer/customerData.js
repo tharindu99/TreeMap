@@ -3,6 +3,8 @@ import { Spinner, Select } from '@chakra-ui/react'
 import * as d3 from 'd3'
 import { useState } from "react"
 import PerAccountAnalytics from "./perAccountAnalytics"
+import { NumberPattern, RemarkGenerator } from "./util"
+
 
 
 const CustomerData = ({cusotmer,exception,journal,str}) => {
@@ -15,25 +17,6 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
     const customerList = Array.from(groupByCustomerID.keys())
 
     const journalGroupByCustomer = d3.group(journal, d => d['IC4PROCUSTOMERID'])
-
-    const NumberPattern = (num) =>{
-        const numM = parseFloat(num).toFixed(2)
-        const arr = numM.toString().split('.')
-        const rtn = arr[0].toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-        return  (arr.length > 1)? rtn+'.'+arr[1]: rtn+'.00'
-    }
-
-    const RemarkGenerator = (am,pm,type_amount) =>{
-        let rtn = ''
-        if (am < pm){
-            rtn = 'PM '+type_amount+' is more than AM'
-        }else if(am > pm){
-            rtn = 'PM '+type_amount+' is less than AM'
-        }else{
-            rtn = 'PM '+type_amount+' is less equal AM'
-        }
-        return rtn
-    }
 
     const AcctSpecificCalculations = (calcType,data) =>{
         if(calcType === 'HighestDepositAcct'){

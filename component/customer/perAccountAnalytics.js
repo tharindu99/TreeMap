@@ -71,8 +71,8 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
 
         const dataDR = data.filter(d => d['IC4PRODRCRIND'] ===  'D')
         const tmpDrRollUp = d3.rollup(dataDR, v => d3.sum(v,d=>parseFloat(d['IC4PROTRANSAMOUNT'])), d => d['IC4PROTRANSTYPE'])
-        const tmpHighDR = d3.least(tmpDrRollUp,([,sum])=> sum)
-        const tmpLowDR = d3.least(tmpDrRollUp,([,sum])=> -sum)
+        const tmpHighDR = d3.least(tmpDrRollUp,([,sum])=> -sum)
+        const tmpLowDR = d3.least(tmpDrRollUp,([,sum])=> sum)
         
         return [
             {name: 'HighestCrType('+tmpHighCR[0]+','+NumberPattern(tmpHighCR[1])+')',label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},},
@@ -199,6 +199,58 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
         }
     }
 
+    const Top10 = (CRDR) => {
+        let dataFiltered
+
+        if(CRDR === 'Credit')dataFiltered = array.filter(d => d.IC4PRODRCRIND === 'C').slice().sort((a,b)=>d3.ascending(a.IC4PROTRANSAMOUNT,b.IC4PROTRANSAMOUNT))
+        if(CRDR === 'Debit')dataFiltered = array.filter(d => d.IC4PRODRCRIND === 'D').slice().sort((a,b)=>d3.ascending(a.IC4PROTRANSAMOUNT,b.IC4PROTRANSAMOUNT))   
+        
+        const dataFilteredTop10 = dataFiltered.slice(0,10)
+        const total = d3.sum(dataFiltered, d => d.IC4PROTRANSAMOUNT)
+        const Top10total = d3.sum(dataFilteredTop10, d => d.IC4PROTRANSAMOUNT)
+
+        const AMTrans = dataFilteredTop10.filter(d=> d['IC4PROTRANSTIME'] >= 0 && d['IC4PROTRANSTIME'] <= 1159)
+        const AMTransTotal = d3.sum(AMTrans, d => d.IC4PROTRANSAMOUNT)
+
+        const PMTrans = dataFilteredTop10.filter(d=> d['IC4PROTRANSTIME'] >= 1200 && d['IC4PROTRANSTIME'] <= 2359)
+        const PMTransTotal = d3.sum(PMTrans, d => d.IC4PROTRANSAMOUNT)
+
+        const TransList = (transactions,top10total,AMPM) => {
+            const percentage = (d3.sum(transactions, d => d.IC4PROTRANSAMOUNT)*100/top10total).toFixed(2)
+            const findings = (AMPM ==='AM')? RemarkGenerator(percentage,100-percentage,''):RemarkGenerator(100-percentage,percentage,'')
+            const tmp = transactions.map(d => {
+                return {
+                    name:'('+d.IC4PROTRANSDATE+','+d.IC4PROTRANSTYPE+','+NumberPattern(d.IC4PROTRANSAMOUNT)+')',
+                    label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+                }
+            })
+            tmp.push({
+                name:'Percentage('+percentage+'%)',
+                label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+            })
+            tmp.push({
+                name:'Findings :'+findings,
+                label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+            })
+            return tmp
+        }
+
+        return {
+            name:'Top 10 '+CRDR+' ('+NumberPattern(Top10total)+','+(Top10total*100/total).toFixed(2)+'%)', 
+            label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+            children: [
+                {name:'Am'+CRDR+' ('+NumberPattern(AMTransTotal)+','+AMTrans.length+')',label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+                children: TransList(AMTrans,Top10total,'AM')
+                },
+                {name:'Pm'+CRDR+' ('+NumberPattern(PMTransTotal)+','+PMTrans.length+')',label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+                children: TransList(PMTrans,Top10total,'PM')
+                }
+            ]
+        }
+        
+    }
+
+
     const exceptionForCutomer = exceptionM.filter(d => d.IC4PROCUSTOMERID === cusotmerID)
     const RiskGroupBy = Array.from(d3.group(exceptionForCutomer, d => d.IC4PRORATING), ([name,children]) => ({name,children}))
     
@@ -215,6 +267,8 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
             }
         })
     }
+
+    
 
 
     return [{
@@ -255,10 +309,10 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                 },
                 {name:'CrAverage('+NumberPattern(((AMcredit+PMcredit)/(amCreditVoucher+pmCreditVoucher)).toFixed(2))+')',
-                label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                label:{fontSize: 12 },lineStyle:{color:'#DC143C'},
                 },
                 {name:'DrAverage('+NumberPattern(((AMdebit+PMdebit)/(amDebitVoucher+pmDebitVoucher)).toFixed(2))+')',
-                label:{fontSize: 12,fontWeight: 'bold' },lineStyle:{color:'#DC143C'},
+                label:{fontSize: 12 },lineStyle:{color:'#DC143C'},
                 },
                 {name:'HighestDepositYear',
                  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
@@ -285,6 +339,17 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                  children: TotalTransType(array)
                 // lineStyle:{color:'#DC143C'},
                 },
+                Top10('Credit')
+                // {name:'Top 10(Credit)',
+                //  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+                //  children: []
+                // // lineStyle:{color:'#DC143C'},
+                // },
+                // {name:'Top 10(Debit)',
+                //  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
+                //  children: []
+                // // lineStyle:{color:'#DC143C'},
+                // },
              ]
             },
             {name:'Exceptions',
