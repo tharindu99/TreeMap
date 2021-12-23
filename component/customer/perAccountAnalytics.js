@@ -339,7 +339,9 @@ const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
                  children: TotalTransType(array)
                 // lineStyle:{color:'#DC143C'},
                 },
-                Top10('Credit')
+                Top10('Credit'),
+                Top10('Debit'),
+
                 // {name:'Top 10(Credit)',
                 //  label:{fontSize: 12},lineStyle:{color:'#DC143C'},
                 //  children: []
