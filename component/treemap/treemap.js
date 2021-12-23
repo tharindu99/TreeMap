@@ -9,6 +9,12 @@ const TreeMap = ({data}) => {
           trigger: 'item',
           triggerOn: 'mousemove'
         },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: { show: true }
+          }
+        },
         
         series: [
           {
