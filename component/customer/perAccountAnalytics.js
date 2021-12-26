@@ -4,6 +4,8 @@ import { useState } from "react"
 
 const PerAccountAnalytics = ([accountID, array,str,exception,cusotmerID]) => {
 
+   
+
     let exceptionM = exception, strM = str
 
         if(accountID != 'ALL'){

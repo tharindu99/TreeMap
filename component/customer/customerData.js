@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import { useState } from "react"
 import PerAccountAnalytics from "./perAccountAnalytics"
 import { NumberPattern, RemarkGenerator } from "./util"
+import PerYearAnalytics from "./perYearAnalysis"
 
 
 
@@ -12,6 +13,9 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
     journal.forEach(e => {
         e.IC4PROTRANSAMOUNT = Math.abs(e.IC4PROTRANSAMOUNT)
     });
+
+    const months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
 
     const groupByCustomerID = d3.group(cusotmer, d => d['IC4PROCUSTOMERID'])
     const customerList = Array.from(groupByCustomerID.keys())
@@ -399,7 +403,7 @@ const CustomerData = ({cusotmer,exception,journal,str}) => {
                             {name:'Monthly'},
                             {name:'Quartelly'},
                         
-                        ]
+                        ].concat(PerYearAnalytics([d2.name,d2.children,str,exception,cusotmerID,d1.name]))
                     }
                 }).concat(PerAccountAnalytics([d1.name,d1.data,str,exception,cusotmerID]))
             }

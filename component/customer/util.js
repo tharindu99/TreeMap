@@ -19,3 +19,11 @@ export const RemarkGenerator = (am,pm,type_amount) =>{
     }
     return rtn
 }
+
+export const AverageCalc = (total,units) => {
+    if(units === 0){
+        return 0
+    }else{
+        return total/units
+    }
+}
